@@ -10,5 +10,9 @@ function downloadSong(url)
     local command = "youtube-dl -x -f 140 -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
 
     os.execute(command)
+end
 
+function clearSongsCache()
+    print("Deleting cache...")
+    --for file in lfs.dir(pathToMusicDir) do
 end
