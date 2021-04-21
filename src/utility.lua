@@ -14,5 +14,6 @@ end
 
 function clearSongsCache()
     print("Deleting cache...")
-    --for file in lfs.dir(pathToMusicDir) do
+    local command = "rm -r " .. pathToMusicDir .. "*"
+    os.execute(command)
 end
