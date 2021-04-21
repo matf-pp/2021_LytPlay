@@ -1,2 +1,5 @@
 *.code-workspace
 samples/
+test.lua
+notes.md
+music/*
