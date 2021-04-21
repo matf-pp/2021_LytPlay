@@ -7,7 +7,7 @@ local pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
 function downloadSong(url)
     print("Downloading " .. url)
     
-    local command = "youtube-dl -x -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
+    local command = "youtube-dl -x -f 140 -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
 
     os.execute(command)
 
