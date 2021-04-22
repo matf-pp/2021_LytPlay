@@ -1,8 +1,5 @@
-local lfs = require "lfs"
-
-local pathToMusicDir = lfs.currentdir() .. "/../music/"
-local pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
-
+pathToMusicDir = "music/"
+pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
 
 function downloadSong(url)
     print("Downloading " .. url)
@@ -17,5 +14,3 @@ function clearSongsCache()
     local command = "rm -r " .. pathToMusicDir .. "*"
     os.execute(command)
 end
-
---downloadSong(arg[1])
