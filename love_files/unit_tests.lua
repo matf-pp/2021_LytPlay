@@ -3,8 +3,8 @@ require("button_events")
 require("data")
 
 function runTests()
-    --downloadSong("https://www.youtube.com/watch?v=d8crNouF89s")
+    --downloadSong("https://youtu.be/PduHaacGTqM")
     --love.timer.sleep(1)
-    --songToPlay = "music/BAKI B3 - OLOVNA RUKA.mp3"
+    --songToPlay = "music/Long After You Are Gone.mp3"
     --playSong()
 end

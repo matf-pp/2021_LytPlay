@@ -1,1 +1,1 @@
-songToPlay = "https://www.youtube.com/watch?v=d8crNouF89s"
+songToPlay = "https://youtu.be/PduHaacGTqM"
