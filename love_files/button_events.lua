@@ -7,7 +7,13 @@ function playSong()
 end
 
 function pauseSong()
+    print("Paused")
+    musicSrc = love.audio.pause()
+end
 
+function resumeSong()
+    print("Resumed")
+    love.audio.play(musicSrc)
 end
 
 function nextSong()
