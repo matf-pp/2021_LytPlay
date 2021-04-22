@@ -2,4 +2,4 @@
 samples/
 test.lua
 notes.md
-music/*
+love_files/music/*
