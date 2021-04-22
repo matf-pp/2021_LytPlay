@@ -1,6 +1,31 @@
-function playSong(file)
-    print("Playing file: " .. file)
-    musicSrc = love.audio.newSource(file, "stream")
-    musicSrc:setVolume(0.05)
+require("data")
+
+function playSong()
+    print("Playing file: " .. songToPlay)
+    musicSrc = love.audio.newSource(songToPlay, "stream") 
     musicSrc:play()
+end
+
+function pauseSong()
+
+end
+
+function nextSong()
+
+end
+
+function previousSong()
+
+end
+
+function updateVolume()
+
+end
+
+function removeSong()
+
+end
+
+function clearQueue()
+
 end

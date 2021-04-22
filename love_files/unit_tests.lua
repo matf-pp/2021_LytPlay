@@ -1,8 +1,10 @@
 require("utility")
 require("button_events")
+require("data")
 
 function runTests()
     --downloadSong("https://www.youtube.com/watch?v=d8crNouF89s")
     --love.timer.sleep(1)
-    --playSong(pathToMusicDir .. "BAKI B3 - OLOVNA RUKA.mp3")
+    --songToPlay = "music/BAKI B3 - OLOVNA RUKA.mp3"
+    --playSong()
 end

@@ -7,4 +7,4 @@ function love.load()
     love.window.setMode(400, 600)
 end
 
---runTests()
+runTests()
