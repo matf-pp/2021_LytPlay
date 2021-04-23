@@ -1,11 +1,63 @@
 require("utility")
 require("button_events")
 require("unit_tests")
+local nuklear = require("nuklear")
+local ui
+local SongURL = {value = ''}
 
 function love.load()
-    love.window.setTitle("Test")
+    love.keyboard.setKeyRepeat(true)
+	ui = nuklear.newUI()
+    love.window.setTitle("LytPlay")
     love.window.setMode(400, 600)
 end
 
---runTests()
---playPauseResumeTest()
+function love.update(dt)
+	ui:frameBegin()
+	if ui:windowBegin('LytPlay', 0, 0, 400, 600) then
+        ui:layoutRow('dynamic', 30, {0.16, 0.64, 0.2})
+        ui:label("SongURL:")
+        ui:edit('box',SongURL)
+        if ui:button('Download') then
+            downloadSong(SongURL.value)
+		end
+		ui:layoutRow('dynamic', 30, 3)
+		if ui:button('Play') then
+			playSong()
+		end
+		if ui:button('Pause') then
+			pauseSong()
+		end
+        if ui:button('Resume') then
+            resumeSong()
+        end
+	end
+	ui:windowEnd()
+	ui:frameEnd()
+end
+
+--Connect love and nuklear events
+function love.draw()
+	ui:draw()
+end
+function love.keypressed(key, scancode, isrepeat)
+	ui:keypressed(key, scancode, isrepeat)
+end
+function love.keyreleased(key, scancode)
+	ui:keyreleased(key, scancode)
+end
+function love.mousepressed(x, y, button, istouch, presses)
+	ui:mousepressed(x, y, button, istouch, presses)
+end
+function love.mousereleased(x, y, button, istouch, presses)
+	ui:mousereleased(x, y, button, istouch, presses)
+end
+function love.mousemoved(x, y, dx, dy, istouch)
+	ui:mousemoved(x, y, dx, dy, istouch)
+end
+function love.textinput(text)
+	ui:textinput(text)
+end
+function love.wheelmoved(x, y)
+	ui:wheelmoved(x, y)
+end
