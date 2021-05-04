@@ -3,7 +3,7 @@ require("button_events")
 require("unit_tests")
 local nuklear = require("nuklear")
 local ui
-local SongURL = {value = ''}
+local inputStr = {value = ''}
 
 function love.load()
     love.keyboard.setKeyRepeat(true)
@@ -16,10 +16,14 @@ function love.update(dt)
 	ui:frameBegin()
 	if ui:windowBegin('LytPlay', 0, 0, 400, 600) then
         ui:layoutRow('dynamic', 30, {0.16, 0.64, 0.2})
-        ui:label("SongURL:")
-        ui:edit('box',SongURL)
+        ui:label("Song:")
+        ui:edit('box',inputStr)
         if ui:button('Download') then
-            downloadSong(SongURL.value)
+			if isStringURL(inputStr.value) == true then
+            	downloadSongByURL(inputStr.value)
+			else 
+				downloadSongByTitle(inputStr.value)
+			end
 		end
 		ui:layoutRow('dynamic', 30, 3)
 		if ui:button('Play') then

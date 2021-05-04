@@ -15,3 +15,8 @@ function playPauseResumeTest()
     love.timer.sleep(5)
     resumeSong()
 end
+
+function isUrlTest()
+    print(isStringURL("https://youtu.be/PduHaacGTqM"))
+    print(isStringURL("aaaaa"))
+end
