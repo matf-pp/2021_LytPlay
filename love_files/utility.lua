@@ -16,14 +16,23 @@ end
 
 function downloadSongByTitle(title) 
     print("String not URL. Downloading song by title...")
+
+    local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. "\"ytsearch1:" .. title .. "\""
+    os.execute(command)
+
+    setSongToPlay("\"ytsearch1:" .. title .. "\"")
 end
 
 function downloadSongByURL(url)
-    print("Downloading: " .. url)
+    print("String URL. DOwnloading song by link...")
     
     local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
     os.execute(command)
 
+    setSongToPlay(url)
+end
+
+function setSongToPlay(url)
     local filename = io.popen("youtube-dl --get-title -o " .. "\"" .. pathToSong .. "\"  " .. url):read("*a")
     filename = "music/" .. string.sub(filename,1,-2) .. ".mp3"
     songToPlay = filename
