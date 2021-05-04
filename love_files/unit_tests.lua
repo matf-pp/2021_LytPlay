@@ -20,3 +20,12 @@ function isUrlTest()
     print(isStringURL("https://youtu.be/PduHaacGTqM"))
     print(isStringURL("aaaaa"))
 end
+
+function debugWidthHeight(prevW, prevH, width, height)
+    print("----------------------------------")
+	print("prevFrameWidth " .. prevW)
+	print("prevFrameHeight " .. prevH)
+	print("Width " .. width)
+	print("Height " .. height)
+	print(width / prevW .. " " .. height / prevH)
+end

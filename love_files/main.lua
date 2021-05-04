@@ -1,23 +1,28 @@
 require("utility")
 require("button_events")
 require("unit_tests")
+
 local nuklear = require("nuklear")
 local ui
 local inputStr = {value = ''}
+local prevFrameWidth, prevFrameHeight = 400, 600
 
 function love.load()
     love.keyboard.setKeyRepeat(true)
 	ui = nuklear.newUI()
     love.window.setTitle("LytPlay")
-    love.window.setMode(400, 600)
+    love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
 end
 
 function love.update(dt)
 	ui:frameBegin()
+	width, height, flags = love.window.getMode()
+	-- ui:scale(width / prevFrameWidth, height / prevFrameHeight)
+	-- debugWidthHeight(prevFrameWidth, prevFrameHeight, width, height)
 	if ui:windowBegin('LytPlay', 0, 0, 400, 600) then
         ui:layoutRow('dynamic', 30, {0.16, 0.64, 0.2})
         ui:label("Song:")
-        ui:edit('box',inputStr)
+        ui:edit('box', inputStr)
         if ui:button('Download') then
 			if isStringURL(inputStr.value) == true then
             	downloadSongByURL(inputStr.value)
@@ -36,6 +41,7 @@ function love.update(dt)
             resumeSong()
         end
 	end
+	prevFrameWidth, prevFrameHeight, flags = love.window.getMode()
 	ui:windowEnd()
 	ui:frameEnd()
 end
