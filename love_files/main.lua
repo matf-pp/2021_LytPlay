@@ -1,17 +1,20 @@
 require("utility")
 require("button_events")
 require("unit_tests")
+require("data")
 
 local nuklear = require("nuklear")
 local ui
 local inputStr = {value = ''}
+local volumeSlider = {value = 0.5}
 local prevFrameWidth, prevFrameHeight = 400, 600
 
 function love.load()
     love.keyboard.setKeyRepeat(true)
 	ui = nuklear.newUI()
     love.window.setTitle("LytPlay")
-    love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
+	-- love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
+    love.window.setMode(400, 600, {minwidth=400, minheight=600})
 end
 
 function love.update(dt)
@@ -30,6 +33,8 @@ function love.update(dt)
 				downloadSongByTitle(inputStr.value)
 			end
 		end
+		ui:layoutRow('dynamic', 30, 1)
+		ui:label(infoText)
 		ui:layoutRow('dynamic', 30, 3)
 		if ui:button('Play') then
 			playSong()
@@ -40,6 +45,13 @@ function love.update(dt)
         if ui:button('Resume') then
             resumeSong()
         end
+		ui:layoutRow('dynamic', 30, 1)
+		if ui:slider(0, volumeSlider, 1, 0.0001) then 
+			updateVolume(volumeSlider.value)
+		end
+		ui:layoutRow('dynamic', 30, 1)
+		ui:label("Placeholder text...")
+
 	end
 	prevFrameWidth, prevFrameHeight, flags = love.window.getMode()
 	ui:windowEnd()

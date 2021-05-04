@@ -24,8 +24,8 @@ function previousSong()
 
 end
 
-function updateVolume()
-
+function updateVolume(value)
+    love.audio.setVolume(value)
 end
 
 function removeSong()
