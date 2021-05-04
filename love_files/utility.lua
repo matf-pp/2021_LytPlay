@@ -1,3 +1,5 @@
+require("data")
+
 local re = require("re")
 
 pathToMusicDir = "music/"
@@ -15,6 +17,7 @@ function isStringURL(str)
 end
 
 function downloadSongByTitle(title) 
+    isDownloading = true
     print("String not URL. Downloading song by title...")
 
     local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. "\"ytsearch1:" .. title .. "\""
@@ -23,9 +26,11 @@ function downloadSongByTitle(title)
     infoText = "Downloading..."
     setSongToPlay("\"ytsearch1:" .. title .. "\"")
     infoText = "Finished downloading! Play your song now."
+    isDownloading = false
 end
 
 function downloadSongByURL(url)
+    isDownloading = true
     print("String URL. DOwnloading song by link...")
     
     local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
@@ -34,6 +39,7 @@ function downloadSongByURL(url)
     infoText = "Downloading..."
     setSongToPlay(url)
     infoText = "Finished downloading! Play your song now."
+    isDownloading = false
 end
 
 function setSongToPlay(url)

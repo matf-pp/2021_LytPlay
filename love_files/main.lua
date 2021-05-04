@@ -18,6 +18,7 @@ function love.load()
 end
 
 function love.update(dt)
+	
 	ui:frameBegin()
 	width, height, flags = love.window.getMode()
 	-- ui:scale(width / prevFrameWidth, height / prevFrameHeight)
@@ -27,24 +28,34 @@ function love.update(dt)
         ui:label("Song:")
         ui:edit('box', inputStr)
         if ui:button('Download') then
-			if isStringURL(inputStr.value) == true then
-            	downloadSongByURL(inputStr.value)
-			else 
-				downloadSongByTitle(inputStr.value)
+			if not isDownloading then
+				downloadSong(inputStr.value)
 			end
 		end
 		ui:layoutRow('dynamic', 30, 1)
 		ui:label(infoText)
 		ui:layoutRow('dynamic', 30, 3)
-		if ui:button('Play') then
-			playSong()
+		if ui:button('Previous') then
+			previousSong()
 		end
-		if ui:button('Pause') then
-			pauseSong()
+		if isPlaying then
+			if isPaused then
+				if ui:button('Play') then
+					resumeSong()
+				end
+			else
+				if ui:button('Pause') then
+					pauseSong()
+				end
+			end
+		else
+			if ui:button('Play') then
+				playSong()
+			end
 		end
-        if ui:button('Resume') then
-            resumeSong()
-        end
+		if ui:button('Next') then
+			nextSong()
+		end
 		ui:layoutRow('dynamic', 30, 1)
 		if ui:slider(0, volumeSlider, 1, 0.0001) then 
 			updateVolume(volumeSlider.value)
