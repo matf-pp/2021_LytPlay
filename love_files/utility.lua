@@ -7,9 +7,9 @@ pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
 
 
 function isStringURL(str)
-    if re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtube.com/')?('watch?v=')?[a-zA-Z0-9-_]^11") ~= nil then 
+    if re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtube.com/')?('watch?v=')?[a-zA-Z0-9-_=%?]") ~= nil then 
         return true
-    elseif re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtu.be/')?('watch%?v=')?[a-zA-Z0-9-_]^11") ~= nil then
+    elseif re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtu.be/')?('watch%?v=')?[a-zA-Z0-9-_=%?]") ~= nil then
         return true
     else
         return false
@@ -23,7 +23,6 @@ function downloadSongByTitle(title)
     local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. "\"ytsearch1:" .. title .. "\""
     os.execute(command)
     
-    infoText = "Downloading..."
     setSongToPlay("\"ytsearch1:" .. title .. "\"")
     infoText = "Finished downloading! Play your song now."
     isDownloading = false
@@ -36,7 +35,6 @@ function downloadSongByURL(url)
     local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
     os.execute(command)
 
-    infoText = "Downloading..."
     setSongToPlay(url)
     infoText = "Finished downloading! Play your song now."
     isDownloading = false
