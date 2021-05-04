@@ -49,9 +49,13 @@ function love.update(dt)
 		if ui:slider(0, volumeSlider, 1, 0.0001) then 
 			updateVolume(volumeSlider.value)
 		end
-		ui:layoutRow('dynamic', 30, 1)
+		ui:layoutRow('dynamic', 410, 1)
 		ui:label("Placeholder text...")
-
+		ui:layoutRow('dynamic', 30, 1)
+		if ui:button('Exit') then
+			clearSongsCache()
+			love.event.quit()
+		end
 	end
 	prevFrameWidth, prevFrameHeight, flags = love.window.getMode()
 	ui:windowEnd()
