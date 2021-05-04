@@ -4,6 +4,7 @@ function playSong()
     print("Playing file: " .. songToPlay)
     musicSrc = love.audio.newSource(songToPlay, "stream") 
     musicSrc:play()
+    infoText = "Waiting for song..."
 end
 
 function pauseSong()

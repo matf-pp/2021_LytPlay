@@ -19,8 +19,10 @@ function downloadSongByTitle(title)
 
     local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. "\"ytsearch1:" .. title .. "\""
     os.execute(command)
-
+    
+    infoText = "Downloading..."
     setSongToPlay("\"ytsearch1:" .. title .. "\"")
+    infoText = "Finished downloading! Play your song now."
 end
 
 function downloadSongByURL(url)
@@ -29,7 +31,9 @@ function downloadSongByURL(url)
     local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
     os.execute(command)
 
+    infoText = "Downloading..."
     setSongToPlay(url)
+    infoText = "Finished downloading! Play your song now."
 end
 
 function setSongToPlay(url)
