@@ -3,14 +3,18 @@ require("button_events")
 require("unit_tests")
 require("data")
 
-
-
-
 local nuklear = require("nuklear")
 local ui
 local inputStr = {value = ''}
 local volumeSlider = {value = 0.5}
 local prevFrameWidth, prevFrameHeight = 400, 600
+
+local channel = {	isDownloading	= love.thread.getChannel("isDownloading"),
+					infoText = love.thread.getChannel("infoText"),
+					songTitle = love.thread.getChannel("songTitle"),
+					songURL = love.thread.getChannel("songURL")
+				}
+
 
 function love.load()
     love.keyboard.setKeyRepeat(true)
@@ -41,9 +45,32 @@ function love.update(dt)
         ui:edit('box', inputStr)
         if ui:button('Download') then
 			if not isDownloading then
-				downloadSong(inputStr.value)
+				if isStringURL(inputStr.value) == true then
+					channel.songURL:push(inputStr.value)
+					thread = love.thread.newThread("threadURLDownload.lua")
+					thread:start()
+				elseif inputStr.value ~= "" then
+					channel.songTitle:push(inputStr.value)
+					thread = love.thread.newThread("threadTitleDownload.lua")
+					thread:start()
+				end
+				inputStr.value = ""
 			end
 		end
+		
+		local threadDataIsDownloading = channel.isDownloading:pop()
+		local threadDataInfoText = channel.infoText:pop()
+
+		if threadDataInfoText then
+			infoText = threadDataInfoText
+		end
+
+		if threadDataIsDownloading == true then
+			isDownloading = true
+		elseif threadDataIsDownloading == false then
+			isDownloading = false
+		end
+
 		ui:layoutRow('dynamic', 30, 1)
 		ui:label(infoText)
 		ui:layoutRow('dynamic', 30, 3)

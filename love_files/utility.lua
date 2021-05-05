@@ -2,9 +2,6 @@ require("data")
 
 local re = require("re")
 
-pathToMusicDir = "music/"
-pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
-
 
 function isStringURL(str)
     if re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtube.com/')?('watch?v=')?[a-zA-Z0-9-_]^11") ~= nil then 
@@ -14,30 +11,6 @@ function isStringURL(str)
     else
         return false
     end
-end
-
-function downloadSongByTitle(title) 
-    isDownloading = true
-    print("String not URL. Downloading song by title...")
-
-    local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. "\"ytsearch1:" .. title .. "\""
-    os.execute(command)
-    
-    setSongToPlay("\"ytsearch1:" .. title .. "\"")
-    infoText = "Finished downloading! Play your song now."
-    isDownloading = false
-end
-
-function downloadSongByURL(url)
-    isDownloading = true
-    print("String URL. DOwnloading song by link...")
-    
-    local command = "youtube-dl -x -f bestaudio --audio-format mp3 -o " .. "\"" .. pathToSong .. "\"" .. " " .. url
-    os.execute(command)
-
-    setSongToPlay(url)
-    infoText = "Finished downloading! Play your song now."
-    isDownloading = false
 end
 
 function setSongToPlay(url)

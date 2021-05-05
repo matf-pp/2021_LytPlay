@@ -1,4 +1,6 @@
 songToPlay = "music/Loituma - Ievan Polkka.mp3"
+pathToMusicDir = "music/"
+pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
 infoText = "Waiting for song..."
 isPlaying = false
 isPaused = false
