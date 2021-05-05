@@ -5,7 +5,7 @@ local re = require("re")
 
 function getSongsListString() 
     local songsList = ""
-    for f in io.popen([[dir -1 "./music"]]):lines() do
+    for f in io.popen([[dir -r1 "./music"]]):lines() do
         removeEscape = string.gsub(f, "\\", "")
         if string.find(removeEscape, ".mp3") then
             song = string.gsub(removeEscape, ".mp3", "")
