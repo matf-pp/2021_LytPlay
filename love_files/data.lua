@@ -1,4 +1,5 @@
-songToPlay = "music/Loituma - Ievan Polkka.mp3"
+currentlyPlaying = ""
+songToPlay = ""
 pathToMusicDir = "music/"
 pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
 infoText = "Waiting for song title or URL..."

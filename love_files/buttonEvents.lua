@@ -1,22 +1,20 @@
 require("data")
 
 function playSong()
-    print("Playing file: " .. songToPlay)
     if isPlaying then love.audio.stop(musicSrc) end
     musicSrc = love.audio.newSource(songToPlay, "stream") 
     musicSrc:play()
+    currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
     infoText = "Waiting for the song title or URL..."
     isPlaying = true
 end
 
 function pauseSong()
-    print("Paused")
     musicSrc = love.audio.pause()
     isPaused = true
 end
 
 function resumeSong()
-    print("Resumed")
     love.audio.play(musicSrc)
     isPaused = false
 end
@@ -27,6 +25,7 @@ function nextSong()
         songToPlay = "music/"..nextSongList.value
         nextSongList = nextSongList.next
         playSong()
+        currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
     end
 end
 
@@ -36,6 +35,7 @@ function previousSong()
         songToPlay = "music/"..previousSongList.value
         previousSongList = previousSongList.next
         playSong()
+        currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
     end
 end
 
