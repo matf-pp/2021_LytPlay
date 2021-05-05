@@ -2,6 +2,7 @@ require("data")
 
 function playSong()
     print("Playing file: " .. songToPlay)
+    if isPlaying then love.audio.stop(musicSrc) end
     musicSrc = love.audio.newSource(songToPlay, "stream") 
     musicSrc:play()
     infoText = "Waiting for song..."
@@ -21,11 +22,21 @@ function resumeSong()
 end
 
 function nextSong()
-
+    if nextSongList then 
+        previousSongList = {next = previousSongList, value = string.gsub(songToPlay,"music/","")}
+        songToPlay = "music/"..nextSongList.value
+        nextSongList = nextSongList.next
+        playSong()
+    end
 end
 
 function previousSong()
-
+    if previousSongList then 
+        nextSongList = {next = nextSongList, value = string.gsub(songToPlay,"music/","")}
+        songToPlay = "music/"..previousSongList.value
+        previousSongList = previousSongList.next
+        playSong()
+    end
 end
 
 function updateVolume(value)

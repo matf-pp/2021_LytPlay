@@ -3,6 +3,9 @@ require("button_events")
 require("unit_tests")
 require("data")
 
+
+
+
 local nuklear = require("nuklear")
 local ui
 local inputStr = {value = ''}
@@ -15,6 +18,15 @@ function love.load()
     love.window.setTitle("LytPlay")
 	-- love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
     love.window.setMode(400, 600, {minwidth=400, minheight=600})
+
+	for f in io.popen([[dir "./music"]]):lines() do nextSongList = {next = nextSongList, value = string.gsub(f,"\\","")} end
+	local l = nextSongList
+	while l do
+		print(l.value)
+		l = l.next
+	end
+	songToPlay = "music/"..nextSongList.value
+	nextSongList = nextSongList.next
 end
 
 function love.update(dt)
