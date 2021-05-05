@@ -40,13 +40,3 @@ function debugWidthHeight(prevW, prevH, width, height)
 	print("Height " .. height)
 	print(width / prevW .. " " .. height / prevH)
 end
-
-function printListStrings()
-    print("-----------------------------")
-    print("Previous:")
-    print(getPreviousSongsListString())
-    print("Current:")
-    print(getCurrentSongNameString())
-    print("Next:")
-    print(getNextSongsListString())
-end

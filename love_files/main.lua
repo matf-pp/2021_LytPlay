@@ -9,11 +9,12 @@ local inputStr = {value = ''}
 local volumeSlider = {value = 1.0}
 local prevFrameWidth, prevFrameHeight = 400, 600
 
-local channel = {	isDownloading	= love.thread.getChannel("isDownloading"),
+-- Channels for communication between main process and threads
+local channel = {	isDownloading = love.thread.getChannel("isDownloading"),
 					infoText = love.thread.getChannel("infoText"),
 					songTitle = love.thread.getChannel("songTitle"),
 					songURL = love.thread.getChannel("songURL"),
-					setSongToPlay = love.thread.getChannel("setSongToPlay")
+					URLorTitle = love.thread.getChannel("URLorTitle")
 				}
 
 
@@ -21,27 +22,17 @@ function love.load()
     love.keyboard.setKeyRepeat(true)
 	ui = nuklear.newUI()
     love.window.setTitle("LytPlay")
-	--love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
     love.window.setMode(400, 600, {minwidth=400, minheight=600})
 
 	for f in io.popen([[dir -1 "./music"]]):lines() do 
-		nextSongList = {next = nextSongList, value = string.gsub(f,"\\","")} 
-	end
-	local l = nextSongList
-
-	if l then
-		songToPlay = "music/"..nextSongList.value
-		nextSongList = nextSongList.next
-		currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
+		nextSongList = {next = nextSongList, value = string.gsub(f, "\\", "")} 
 	end
 end
 
 function love.update(dt)
-	
 	ui:frameBegin()
 	width, height, flags = love.window.getMode()
-	-- ui:scale(width / prevFrameWidth, height / prevFrameHeight)
-	-- debugWidthHeight(prevFrameWidth, prevFrameHeight, width, height)
+
 	if ui:windowBegin('LytPlay', 0, 0, 400, 600) then
         ui:layoutRow('dynamic', 30, {0.16, 0.64, 0.2})
         ui:label("Song:")
@@ -63,10 +54,11 @@ function love.update(dt)
 		
 		local threadDataIsDownloading = channel.isDownloading:pop()
 		local threadDataInfoText = channel.infoText:pop()
-		local threadDataSetSongToPlay = channel.setSongToPlay:pop()
+		local threadDataURLorTitle = channel.URLorTitle:pop()
+		
 
-		if threadDataSetSongToPlay then
-			setSongToPlay(threadDataSetSongToPlay)
+		if threadDataURLorTitle then
+			nextSongList = {next = nextSongList, value = getSongName(threadDataURLorTitle)}
 		end
 
 		if threadDataInfoText then
@@ -77,7 +69,6 @@ function love.update(dt)
 			isDownloading = true
 		elseif threadDataIsDownloading == false then
 			isDownloading = false
-			nextSongList = {next = nextSongList, value = string.gsub(songToPlay, "music/", "")}
 		end
 
 		ui:layoutRow('dynamic', 30, 1)
@@ -119,7 +110,6 @@ function love.update(dt)
 			love.event.quit()
 		end
 	end
-	prevFrameWidth, prevFrameHeight, flags = love.window.getMode()
 	ui:windowEnd()
 	ui:frameEnd()
 end

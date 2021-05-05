@@ -8,3 +8,5 @@ isPaused = false
 isDownloading = false
 nextSongList = nil
 previousSongList = nil
+
+musicSrc = nil
