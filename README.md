@@ -4,15 +4,13 @@
 
 Music player that plays music from youtube. Supports title and link input.
 
-## About
-
-Technologies:
+## Technologies
 
 **Language**: Lua </br>
 **Framework**: LÖVE </br>
 **Libraries**: lpeg, nuklear </br>
 
-Team members:
+## Team members
 
 * Stevan Popović - 352/2020
 * Minja Popović - 39/2018
