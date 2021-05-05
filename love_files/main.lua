@@ -24,10 +24,12 @@ function love.load()
 	-- love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
     love.window.setMode(400, 600, {minwidth=400, minheight=600})
 
-	for f in io.popen([[dir "./music"]]):lines() do nextSongList = {next = nextSongList, value = string.gsub(f,"\\","")} end
+	for f in io.popen([[dir -1 "./music"]]):lines() do 
+		nextSongList = {next = nextSongList, value = string.gsub(f,"\\","")} 
+	end
 	local l = nextSongList
 	while l do
-		print(l.value .. "\n")
+		print(l.value)
 		l = l.next
 	end
 	songToPlay = "music/"..nextSongList.value
