@@ -61,5 +61,6 @@ love .
 
 ## How it looks
 
-![2021-05-04_16-56](https://user-images.githubusercontent.com/30701714/117092499-b202ef80-ad5e-11eb-9e4d-985770188880.png)
+![2021-05-04_16-56](https://user-images.githubusercontent.com/30701714/117133918-2b253580-ada5-11eb-9b91-0c1408732595.png)
+
 
