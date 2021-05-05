@@ -51,10 +51,10 @@ function clearQueue()
 
 end
 
-function downloadSong(inputStr)
-    if isStringURL(inputStr) == true then
-        downloadSongByURL(inputStr)
-    elseif inputStr ~= '' then
-        downloadSongByTitle(inputStr)
+function downloadSong(input)
+    if isStringURL(input) == true then
+        downloadSongByURL(input)
+    elseif inputStr ~= "" then
+        downloadSongByTitle(input)
     end
 end

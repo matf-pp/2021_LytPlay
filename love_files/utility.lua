@@ -7,9 +7,9 @@ pathToSong = pathToMusicDir .. "%(title)s.%(ext)s"
 
 
 function isStringURL(str)
-    if re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtube.com/')?('watch?v=')?[a-zA-Z0-9-_=%?]") ~= nil then 
+    if re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtube.com/')?('watch?v=')?[a-zA-Z0-9-_]^11") ~= nil then 
         return true
-    elseif re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtu.be/')?('watch%?v=')?[a-zA-Z0-9-_=%?]") ~= nil then
+    elseif re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtu.be/')?('watch%?v=')?[a-zA-Z0-9-_]^11") ~= nil then
         return true
     else
         return false
