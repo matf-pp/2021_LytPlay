@@ -24,4 +24,6 @@ function clearSongsCache()
     print("Deleting cache...")
     local command = "rm -r " .. pathToMusicDir .. "*"
     os.execute(command)
+    nextSongList = nil
+    previousSongList = nil
 end
