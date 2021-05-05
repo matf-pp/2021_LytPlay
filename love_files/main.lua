@@ -6,7 +6,7 @@ require("data")
 local nuklear = require("nuklear")
 local ui
 local inputStr = {value = ''}
-local volumeSlider = {value = 0.5}
+local volumeSlider = {value = 1.0}
 local prevFrameWidth, prevFrameHeight = 400, 600
 
 local channel = {	isDownloading	= love.thread.getChannel("isDownloading"),
@@ -21,7 +21,7 @@ function love.load()
     love.keyboard.setKeyRepeat(true)
 	ui = nuklear.newUI()
     love.window.setTitle("LytPlay")
-	-- love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
+	--love.window.setMode(400, 600, {resizable=true, minwidth=400, minheight=600})
     love.window.setMode(400, 600, {minwidth=400, minheight=600})
 
 	for f in io.popen([[dir -1 "./music"]]):lines() do 
@@ -149,3 +149,6 @@ end
 function love.wheelmoved(x, y)
 	ui:wheelmoved(x, y)
 end
+
+--isUrlTest()
+testChoice()

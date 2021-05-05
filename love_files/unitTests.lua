@@ -21,6 +21,17 @@ function isUrlTest()
     print(isStringURL("aaaaa"))
 end
 
+function testChoice()
+    str1 = 'anavolimilovana'
+    str2 = 'milavolianovana'
+    if re.match(str1, "('anavolimilovana')/('kukurikokokoda')") ~= nil then
+        print('anavolimilovana')
+    end
+    if re.match(str2, "('tojepravaneygoda')/('milavolianovana')") ~= nil then
+        print('milavolianovana')
+    end
+end
+
 function debugWidthHeight(prevW, prevH, width, height)
     print("----------------------------------")
 	print("prevFrameWidth " .. prevW)
