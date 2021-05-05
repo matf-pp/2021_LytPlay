@@ -1,5 +1,5 @@
 require("utility")
-require("button_events")
+require("buttonEvents")
 require("data")
 
 function runTests()

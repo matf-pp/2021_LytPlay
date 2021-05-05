@@ -5,7 +5,7 @@ function playSong()
     if isPlaying then love.audio.stop(musicSrc) end
     musicSrc = love.audio.newSource(songToPlay, "stream") 
     musicSrc:play()
-    infoText = "Waiting for song..."
+    infoText = "Waiting for the song title or URL..."
     isPlaying = true
 end
 
@@ -44,9 +44,5 @@ function updateVolume(value)
 end
 
 function removeSong()
-
-end
-
-function clearQueue()
 
 end

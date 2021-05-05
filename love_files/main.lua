@@ -1,6 +1,6 @@
 require("utility")
-require("button_events")
-require("unit_tests")
+require("buttonEvents")
+require("unitTests")
 require("data")
 
 local nuklear = require("nuklear")
@@ -27,7 +27,7 @@ function love.load()
 	for f in io.popen([[dir "./music"]]):lines() do nextSongList = {next = nextSongList, value = string.gsub(f,"\\","")} end
 	local l = nextSongList
 	while l do
-		print(l.value)
+		print(l.value .. "\n")
 		l = l.next
 	end
 	songToPlay = "music/"..nextSongList.value
@@ -75,7 +75,6 @@ function love.update(dt)
 			isDownloading = true
 		elseif threadDataIsDownloading == false then
 			isDownloading = false
-			print("Adding new song in the queue " .. songToPlay)
 			nextSongList = {next = nextSongList, value = string.gsub(songToPlay, "music/", "")}
 		end
 
