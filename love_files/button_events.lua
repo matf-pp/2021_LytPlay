@@ -23,7 +23,7 @@ end
 
 function nextSong()
     if nextSongList then 
-        previousSongList = {next = previousSongList, value = string.gsub(songToPlay,"music/","")}
+        previousSongList = {next = previousSongList, value = string.gsub(songToPlay, "music/", "")}
         songToPlay = "music/"..nextSongList.value
         nextSongList = nextSongList.next
         playSong()
@@ -32,7 +32,7 @@ end
 
 function previousSong()
     if previousSongList then 
-        nextSongList = {next = nextSongList, value = string.gsub(songToPlay,"music/","")}
+        nextSongList = {next = nextSongList, value = string.gsub(songToPlay, "music/", "")}
         songToPlay = "music/"..previousSongList.value
         previousSongList = previousSongList.next
         playSong()
@@ -49,14 +49,4 @@ end
 
 function clearQueue()
 
-end
-
-function downloadSong(input)
-    if isStringURL(input) == true then
-        downloadSongByURL(input)
-        nextSongList = {next = nextSongList, value = string.gsub(songToPlay,"music/","")}
-    elseif inputStr ~= "" then
-        downloadSongByTitle(input)
-        nextSongList = {next = nextSongList, value = string.gsub(songToPlay,"music/","")}
-    end
 end

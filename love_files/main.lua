@@ -12,7 +12,8 @@ local prevFrameWidth, prevFrameHeight = 400, 600
 local channel = {	isDownloading	= love.thread.getChannel("isDownloading"),
 					infoText = love.thread.getChannel("infoText"),
 					songTitle = love.thread.getChannel("songTitle"),
-					songURL = love.thread.getChannel("songURL")
+					songURL = love.thread.getChannel("songURL"),
+					setSongToPlay = love.thread.getChannel("setSongToPlay")
 				}
 
 
@@ -60,6 +61,11 @@ function love.update(dt)
 		
 		local threadDataIsDownloading = channel.isDownloading:pop()
 		local threadDataInfoText = channel.infoText:pop()
+		local threadDataSetSongToPlay = channel.setSongToPlay:pop()
+
+		if threadDataSetSongToPlay then
+			setSongToPlay(threadDataSetSongToPlay)
+		end
 
 		if threadDataInfoText then
 			infoText = threadDataInfoText
@@ -69,6 +75,8 @@ function love.update(dt)
 			isDownloading = true
 		elseif threadDataIsDownloading == false then
 			isDownloading = false
+			print("Adding new song in the queue " .. songToPlay)
+			nextSongList = {next = nextSongList, value = string.gsub(songToPlay, "music/", "")}
 		end
 
 		ui:layoutRow('dynamic', 30, 1)

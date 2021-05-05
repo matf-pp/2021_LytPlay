@@ -4,7 +4,8 @@ pathToSong = "music/%(title)s.%(ext)s"
 
 local channel = {	isDownloading	= love.thread.getChannel("isDownloading"),
 					infoText = love.thread.getChannel("infoText"),
-                    songURL = love.thread.getChannel("songURL")
+                    songURL = love.thread.getChannel("songURL"),
+                    setSongToPlay = love.thread.getChannel("setSongToPlay")
 				}
 
 
@@ -16,7 +17,7 @@ if songURL then
     channel.infoText:push("Downloading song...")
     os.execute(command)
 
-    setSongToPlay(songURL)
+    channel.setSongToPlay:push(songURL)
     channel.infoText:push("Finished downloading! Play your song now.")
     channel.isDownloading:push(false)
 end
