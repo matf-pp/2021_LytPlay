@@ -41,6 +41,9 @@ function getPreviousSongsListString()
 end
 
 function getCurrentSongNameString()
+    if currentlyPlaying == "" then
+        return ""
+    end
     return string.sub(currentlyPlaying, 7) .. "\n"
 end
 
@@ -65,4 +68,5 @@ function clearSongsCache()
     os.execute(command)
     nextSongList = nil
     previousSongList = nil
+    songToPlay = ""
 end

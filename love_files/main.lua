@@ -28,9 +28,12 @@ function love.load()
 		nextSongList = {next = nextSongList, value = string.gsub(f,"\\","")} 
 	end
 	local l = nextSongList
-	songToPlay = "music/"..nextSongList.value
-	nextSongList = nextSongList.next
-	currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
+
+	if l then
+		songToPlay = "music/"..nextSongList.value
+		nextSongList = nextSongList.next
+		currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
+	end
 end
 
 function love.update(dt)

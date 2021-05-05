@@ -2,11 +2,13 @@ require("data")
 
 function playSong()
     if isPlaying then love.audio.stop(musicSrc) end
-    musicSrc = love.audio.newSource(songToPlay, "stream") 
-    musicSrc:play()
-    currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
-    infoText = "Waiting for the song title or URL..."
-    isPlaying = true
+    if songToPlay ~= "" then
+        musicSrc = love.audio.newSource(songToPlay, "stream") 
+        musicSrc:play()
+        currentlyPlaying = string.gsub(songToPlay, ".mp3", "")
+        infoText = "Waiting for the song title or URL..."
+        isPlaying = true
+    end
 end
 
 function pauseSong()
