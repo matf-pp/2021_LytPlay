@@ -3,6 +3,18 @@ require("data")
 local re = require("re")
 
 
+function getSongsListString() 
+    local songsList = ""
+    for f in io.popen([[dir -1 "./music"]]):lines() do
+        removeEscape = string.gsub(f, "\\", "")
+        if string.find(removeEscape, ".mp3") then
+            song = string.gsub(removeEscape, ".mp3", "")
+		    songsList = songsList .. song .. "\n"
+        end
+	end
+    return songsList
+end
+
 function isStringURL(str)
     if re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtube.com/')?('watch?v=')?[a-zA-Z0-9-_]^11") ~= nil then 
         return true

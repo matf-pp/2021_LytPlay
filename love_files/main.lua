@@ -109,7 +109,7 @@ function love.update(dt)
 			updateVolume(volumeSlider.value)
 		end
 		ui:layoutRow('dynamic', 380, 1)
-		ui:label("Placeholder text...")
+		ui:label(getSongsListString(), 'top left')
 		ui:layoutRow('dynamic', 30, 1)
 		if ui:button('Clear cache') then
 			clearSongsCache()
