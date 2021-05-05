@@ -54,7 +54,9 @@ end
 function downloadSong(input)
     if isStringURL(input) == true then
         downloadSongByURL(input)
+        nextSongList = {next = nextSongList, value = string.gsub(songToPlay,"music/","")}
     elseif inputStr ~= "" then
         downloadSongByTitle(input)
+        nextSongList = {next = nextSongList, value = string.gsub(songToPlay,"music/","")}
     end
 end
