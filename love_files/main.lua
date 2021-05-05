@@ -151,4 +151,4 @@ function love.wheelmoved(x, y)
 end
 
 --isUrlTest()
-testChoice()
+--testChoice()

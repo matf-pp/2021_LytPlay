@@ -52,6 +52,8 @@ function isStringURL(str)
         return true
     elseif re.match(str, "(((('http'('s')?)'://')?('www.')?)?'youtu.be/')?('watch%?v=')?[a-zA-Z0-9-_]^11") ~= nil then
         return true
+    elseif re.match(str, "((('http'('s')?'://')?('www.')?)?'youtube.com/')?(('playlist?list='[a-zA-Z0-9_-]^34)/('watch?'('list='[a-zA-Z0-9_-]^18'&v='[a-zA-Z0-9_-]^11'&')/('v='[a-zA-Z0-9_-]^11'&list='[a-zA-Z0-9_-]^18'&')))") then
+        return true
     else
         return false
     end
