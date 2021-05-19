@@ -1,3 +1,6 @@
+os.execute('cp ../lib/* .')
+os.execute('mkdir music')
+
 require("utility")
 require("buttonEvents")
 require("unitTests")
