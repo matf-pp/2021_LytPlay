@@ -3,8 +3,8 @@ os.execute('mkdir music')
 
 require("utility")
 require("buttonEvents")
-require("unitTests")
 require("data")
+-- require("unitTests")
 
 local nuklear = require("nuklear")
 local ui
