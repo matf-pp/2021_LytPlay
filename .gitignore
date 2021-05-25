@@ -4,3 +4,4 @@ test.lua
 notes.md
 love_files/music/*
 love_files/src/*.so
+love_files/src/unitTests.lua
